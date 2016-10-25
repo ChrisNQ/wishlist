@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <title>Wishlist</title>
+</head>
+<body>
+    <h2>Hello {{request.session.user.first_name}}!</h2>
+    <a href="{% url 'login:logout' %}">Logout</a>
+    <hr>
+    <h3>Your Wish List:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Added By</th>
+                <th>Date Added</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in myproducts %}
+            <tr>
+                <td><a href="{% url 'wishlist:show' product.id %}">{{product.productname}}</a></td>
+                <td>{{product.users.first_name}}</td>
+                <td>{{product.created_at}}</td>
+                <td><a href="{% url 'wishlist:delete' product.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Other Users' Wish List:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Added By</th>
+                <th>Date Added</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in totalproducts %}
+            <tr>
+                <td><a href="{% url 'wishlist:show' product.id %}">{{product.productname}}</a></td>
+                <td>{{product.users.first_name}}</td>
+                <td>{{product.created_at}}</td>
+                <td><a href="#">Add to Wishlist</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="addproduct">Add Item</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <title>Add To Wishlist</title>
+</head>
+<body>
+    <h2>Create a New Wish List Item</h2>
+    <a href="{% url 'wishlist:index' %}">Home</a> | <a href="{% url 'login:logout' %}">Logout</a>
+    <hr>
+    <br>
+    <form class="" action="{% url 'wishlist:add_wishlist' %}" method="post">
+        {% csrf_token %}
+        <label>Item/Product:</label>
+        <input type="text" name="addedproduct" placeholder="Add New Wishlist Item Here">
+        <input type="submit" value="Add To Wishlist">
+    </form>
+</body>
+</html>
